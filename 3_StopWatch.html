@@ -1,55 +1,94 @@
 <html>
     <head>
+        <!-- import bootstrap css -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <!-- custom css -->
+        <link rel="stylesheet" type="text/css" href="css/main.css">
         <title>Web Page</title>
     </head>
     <style>
-        html {
-            display: table;
-            margin: auto;
+        label {
+            font-size: 100;
         }
 
-        div {
-            text-align: center;
+        #box {
+            background-color: darkgray;
         }
 
-        textarea {
-            width:100%;
-            height:300;
+        #time {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 5px 50px;
+            background-color: lightgoldenrodyellow;
+        }
+
+        button {
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        var count = false;
+        var hour = 0; // hour
+        var min = 0;  // minute
+        var sec = 0;  // second
+        var str = ""; // display time
+        window.setInterval(function(){
+            if(count) {
+                str = ""; // reset string
+                sec += 1; // counting time
+                // update minute and hour number
+                if (sec >= 60) {
+                    sec = 0;
+                    min += 1;
+                }
+                if (min >= 60) {
+                    min = 0;
+                    hour += 1;
+                }
+                // hour display format
+                if (hour < 10) {
+                    str += "0" + hour + ":";
+                } else {
+                    str += hour + ":";
+                }
+                // minute display format
+                if (min < 10) {
+                    str += "0" + min + ":";
+                } else {
+                    str += min + ":";
+                }
+                // minute display format
+                if (sec < 10) {
+                    str += "0" + sec;
+                } else {
+                    str += sec;
+                }
+                // update the string
+                document.getElementById("time").innerHTML = str;
+            }
+        },1000);
+
+        function start() {
+            count = true;
         }
         
-    </style>
-
-    <script>
-        function addLineBreak() {
-            var input_text = document.getElementById("input_text").value.split("\n")
-            var output = '';
-            for(var i=0; i < input_text.length; i++) {
-                if(input_text[i] != '') {
-                    output += input_text[i] + "\n\n" 
-                }
-            }
-            document.getElementById("output_text").value = output
+        function stop() {
+            count = false;
         }
 
-        function removeLineBreak() {
-            var input_text = document.getElementById("input_text").value.split("\n")
-            var output = '';
-            for(var i=0; i < input_text.length; i++) {
-                if(input_text[i] != '') {
-                    output += input_text[i] + "\n" 
-                }
-            }
-            document.getElementById("output_text").value = output
+        function reset() {
+            count = false;
+            hour = min = sec = 0;
+            document.getElementById("time").innerHTML = hour + "0:0" + min + ":0" + sec;
         }
     </script>
     <body>
-        <div><h1>This is the second random web page created</h1></div>
-        <div>
-            <label>Input text that needed to add or remove line break</label><br />
-            <button onclick="addLineBreak()">Add</button>
-            <button onclick="removeLineBreak()">Remove</button><br />
-            <textarea id="input_text" placeholder="Input Text"></textarea>
-            <textarea id="output_text" placeholder="Output Text"></textarea>
+        <div><h1>This is the third random web page created</h1></div>
+        <div id="box" class="border border-info">
+            <label id="time">00:00:00</label><br />
+            <button class="btn btn-success btn-lg" onclick="start()">START</button>
+            <button class="btn btn-danger btn-lg" onclick="stop()">STOP</button>
+            <button class="btn btn-secondary btn-lg" onclick="reset()">RESET</button>
         </div>
         
     </body>
