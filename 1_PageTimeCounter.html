@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>First Web Page</title>
+    </head>
+    <style>
+        html {
+            display: table;
+            margin: auto;
+        }
+
+        div {
+            text-align: center;
+        }
+        
+    </style>
+
+    <script>
+        var current_time = 0;
+        // count the time that user stayed on this page 
+        window.setInterval(function(){
+            var selected_display = display_time()
+            current_time+=1; // counting time
+            var str;         // display string
+
+            // display the time in selected time format
+            switch(selected_display){
+                case "hour":
+                    var hr = Math.floor(current_time / 60 / 60); // minute
+                    var min = Math.floor(current_time / 60 % 60); // minute
+                    var sec = Math.floor(current_time % 60); // second
+                    str = hr + " hour(s)<br />" + min + " minute(s)<br />" + sec + " second(s)"
+                    break;
+                case "minute":
+                    var min = Math.floor(current_time / 60); // minute
+                    var sec = Math.floor(current_time % 60); // second
+                    str = min + " minute(s)<br />" + sec + " second(s)"
+                    break;
+                default:
+                    str = current_time + " second(s)"
+            }
+            document.getElementById("time").innerHTML = str
+        }, 1000);
+
+        // get selected time format
+        function display_time() {
+            var radios = document.getElementsByName('display_time');
+            for(var i=0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    return radios[i].value
+                }
+            }
+        }
+    </script>
+    <body>
+        <div><h1>This is the first random web page created</h1></div>
+        <div>
+            Select the displayed time format:<br />
+            <input type="radio" name="display_time" value="hour" /> Hour
+            <input type="radio" name="display_time" value="minute" /> Minute
+            <input type="radio" name="display_time" value="second" checked /> Second
+        </div>
+        <div>
+            <h2>You've been on this page for: <br /><label id="time"></label></h2>
+        </div>
+        
+        
+    </body>
+</html>

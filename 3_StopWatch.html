@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>Web Page</title>
+    </head>
+    <style>
+        html {
+            display: table;
+            margin: auto;
+        }
+
+        div {
+            text-align: center;
+        }
+
+        textarea {
+            width:100%;
+            height:300;
+        }
+        
+    </style>
+
+    <script>
+        function addLineBreak() {
+            var input_text = document.getElementById("input_text").value.split("\n")
+            var output = '';
+            for(var i=0; i < input_text.length; i++) {
+                if(input_text[i] != '') {
+                    output += input_text[i] + "\n\n" 
+                }
+            }
+            document.getElementById("output_text").value = output
+        }
+
+        function removeLineBreak() {
+            var input_text = document.getElementById("input_text").value.split("\n")
+            var output = '';
+            for(var i=0; i < input_text.length; i++) {
+                if(input_text[i] != '') {
+                    output += input_text[i] + "\n" 
+                }
+            }
+            document.getElementById("output_text").value = output
+        }
+    </script>
+    <body>
+        <div><h1>This is the second random web page created</h1></div>
+        <div>
+            <label>Input text that needed to add or remove line break</label><br />
+            <button onclick="addLineBreak()">Add</button>
+            <button onclick="removeLineBreak()">Remove</button><br />
+            <textarea id="input_text" placeholder="Input Text"></textarea>
+            <textarea id="output_text" placeholder="Output Text"></textarea>
+        </div>
+        
+    </body>
+</html>
