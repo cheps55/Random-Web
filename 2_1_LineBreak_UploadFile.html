@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>Web Page</title>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+    </head>
+    <style>
+        textarea {
+            width:100%;
+            height:300;
+        }
+    </style>
+
+    <script> 
+        document.addEventListener('DOMContentLoaded', function(){
+            const fileUploader = document.getElementById('file-uploader');
+            fileUploader.addEventListener('change', async (e) => {
+                for(var i=0;i < e.target.files.length; i++) {
+                    const text = await readFile(e.target.files[i]);
+                    download(e.target.files[i], text)
+                }
+                document.getElementById('result').innerHTML = "All Done";
+            });
+            
+        }, false);
+        
+        function readFile(file) {
+            var reader = new FileReader();
+            return new Promise((resolve, reject) => {
+                reader.onload = (evt) => {
+                    resolve(addLineBreak(evt.target.result))
+                };
+                reader.readAsText(file, "big5");
+            });
+        }
+        function addLineBreak(text) {
+            var output = '';
+            var input_text = text.split("\n");
+            for(var i=0; i < input_text.length; i++) {
+                if(input_text[i] != '') {
+                    output += input_text[i] + "\n\n" 
+                }
+            }
+            return output;
+        }
+
+        async function download(file, text) {
+            var pom = document.createElement('a');
+            pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            pom.setAttribute('download', file.name);
+            pom.style.display = 'none';
+            document.body.appendChild(pom);
+            pom.click();
+            document.body.removeChild(pom);
+        }
+    </script>
+    <body>
+        <div><h1>This is the forth random web page created</h1></div>
+        <div>
+            <label>Upload txt file(s) to add line break</label><br />
+            <input id='file-uploader' type='file' accept='.txt' multiple />
+            <div id="result"></div>
+        </div>
+        
+    </body>
+</html>

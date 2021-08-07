@@ -32,13 +32,19 @@
             }
             document.getElementById("output_text").value = output
         }
+
+        function clearAll() {
+            document.getElementById("input_text").value = '';
+            document.getElementById("output_text").value = '';
+        }
     </script>
     <body>
         <div><h1>This is the second random web page created</h1></div>
         <div>
             <label>Input text that needed to add or remove line break</label><br />
             <button onclick="addLineBreak()">Add</button>
-            <button onclick="removeLineBreak()">Remove</button><br />
+            <button onclick="removeLineBreak()">Remove</button>
+            <button onclick="clearAll()">Clear</button><br />
             <textarea id="input_text" placeholder="Input Text"></textarea>
             <textarea id="output_text" placeholder="Output Text"></textarea>
         </div>
